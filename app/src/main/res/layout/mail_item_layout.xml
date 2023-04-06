@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="email"
+            type="com.sscience.example.recyclerview.data.Email" />
+
+        <variable
+            name="clickListener"
+            type="com.sscience.example.recyclerview.ui.MailListAdapter.EmailClickListener" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="0dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?selectableItemBackground"
+        android:onClick="@{(view) -> clickListener.onClick(email,view)}"
+        app:cardCornerRadius="0dp"
+        app:contentPadding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="25dp"
+                app:cardBackgroundColor="@color/purple_200"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:id="@+id/email_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:textColor="@color/white"
+                    tools:text="G"
+                    app:setAvatarCharacter="@{email.sender}"
+                    android:gravity="center" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/email_sender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{email.sender}"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    tools:text="Material design" />
+
+                <TextView
+                    android:id="@+id/email_body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorSecondary"
+                    style="@style/TextAppearance.MaterialComponents.Body2"
+                    android:text="@{email.body}"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    tools:text=" You've been selected as a winner in our latest raffle! To claim your prize, click on the link." />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/email_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16sp"
+                app:isStarred="@{email.starred}"
+                android:background="@android:color/transparent"
+                android:src="@drawable/outline_star_border_24" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

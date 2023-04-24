@@ -39,6 +39,7 @@
                 app:cardBackgroundColor="@color/purple_200"
                 app:cardElevation="0dp">
 
+                <!-- Extract senders first name character or hide when sender has an avatar -->
                 <TextView
                     android:id="@+id/email_avatar"
                     android:layout_width="match_parent"
@@ -46,8 +47,19 @@
                     style="@style/TextAppearance.MaterialComponents.Headline6"
                     android:textColor="@color/white"
                     tools:text="G"
-                    app:setAvatarCharacter="@{email.sender}"
+                    app:goneIf="@{email.sender.avatar != 0}"
+                    app:setAvatarCharacter="@{email.sender.name}"
                     android:gravity="center" />
+
+
+                <!-- Show senders avatar or hide -->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:drawableSrc="@{email.sender.avatar}"
+                    app:goneIf="@{email.sender.avatar == 0}" />
+
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -62,7 +74,7 @@
                     android:id="@+id/email_sender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{email.sender}"
+                    android:text="@{email.sender.name}"
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     tools:text="Material design" />
 

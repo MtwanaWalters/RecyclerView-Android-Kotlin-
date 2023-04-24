@@ -23,8 +23,9 @@ class MainActivity: AppCompatActivity() {
     }
 
     private fun initList(){
+
         _emailAdapter = MailListAdapter(emailClickListener ).apply {
-            submitList(EmailDataStore.inbox)
+            formatAndSubmit(EmailDataStore.inbox!!, EmailDataStore.senders)
         }
 
         binding.emailList.apply {

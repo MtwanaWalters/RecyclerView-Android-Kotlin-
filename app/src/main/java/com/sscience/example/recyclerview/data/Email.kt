@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 
 data class Email (
     val id: Long,
-    val sender: String,
+    val sender: Sender,
     val subject: String,
     val body: String,
     val isStarred: Boolean = false,
